@@ -6,13 +6,12 @@
 	
 	function createBlock(blockData) {
 		const id = blockData.id
-        const type = blockData.type
-        console.log(type)
+        const blockType = blockData.blockType
 
 		const block = $('<div></div>')
 			.addClass('block')
-            .addClass(type)
-            .attr('blockType',type)
+            .addClass(blockType)
+            .attr('blockType',blockType)
 			.attr('id',id)
 			.css({
 				top: blockData.y,
@@ -64,11 +63,23 @@
 	}
 
 	$('#add-block').click(function () {
-        createBlock({type: "block"});
+        createBlock({blockType: "block"});
     });
 
 	$('#add-pig').click(function () {
-        createBlock({type: "pig"});
+        createBlock({blockType: "pig"});
+    });
+
+	$('#add-catapult').click(function () {
+        createBlock({blockType: "catapult"});
+    });
+
+	$('#add-dirt').click(function () {
+        createBlock({blockType: "dirt"});
+    });
+
+	$('#add-rock').click(function () {
+        createBlock({blockType: "rock"});
     });
 
     $('#save-level').click(function () {
