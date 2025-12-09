@@ -1,12 +1,51 @@
 body {
     font-family: sans-serif;
-    display: flex;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fed0bb;
+    margin:0;
 }
+
+header {
+    background-color: #8c2f39;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+    header p{
+        margin-top:0;
+        margin-bottom: 15px;
+    }
+
+footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    background-color: #b23a48;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+    footer p{
+        margin: 0;
+        font-weight: bold;
+    }
+
 .main-content{
     flex: 0 1 75%;
     text-align: center;
 }
+
 .sidebar{
     flex: 0 1 25%;
     background: #808080;
@@ -37,3 +76,43 @@ body {
     background: #070707;
     position: absolute;
 }
+
+.button-row{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+    .button-row button{
+        padding: 5px;
+    }
+
+#delete-level {
+    background-color: darkred;
+    color: whitesmoke;
+}
+
+#add-block {
+    background-color: rosybrown;
+    color: whitesmoke;
+}
+
+#add-pig {
+    background-color: darkgreen;
+    color: whitesmoke;
+}
+
+#add-catapult{
+    background-color: saddlebrown;
+    color: whitesmoke;
+}
+
+#add-dirt {
+    background-color: sandybrown;
+    color: whitesmoke;
+}
+
+#add-rock {
+    background-color: dimgray;
+    color: whitesmoke;
+}
+
