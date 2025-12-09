@@ -77,6 +77,13 @@ footer {
     position: absolute;
 }
 
+.pig {
+    width: 100px;
+    height: 100px;
+    background: #14A623;
+    position: absolute;
+}
+
 .button-row{
     margin-top: 15px;
     margin-bottom: 15px;
