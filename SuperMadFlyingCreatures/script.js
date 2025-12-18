@@ -50,6 +50,9 @@
     const BIRD_MAX_FLIGHT_SECONDS = 10.0;
     const PIG_RADIUS = 0.3;
 
+    const LEVEL_EDITOR_WIDTH = 800;
+    const LEVEL_EDITOR_HEIGHT = 600;
+
     let levels = {
         pigs : [],
         block : [],
@@ -80,6 +83,13 @@
     //     // }
     // ]);
 
+    const PositionToPercentage = (x, y) => {
+        return {
+            x: (x / LEVEL_EDITOR_WIDTH),
+            y: (y / LEVEL_EDITOR_HEIGHT)
+        }
+    }
+
     const LoadLevel = (currentLevel) => (
         fetch(`./levels/${currentLevel}.json`)
         .then(response => {
@@ -108,6 +118,7 @@
                         break;
                 }
             });
+            // console.log(levels);
             return levels;
         })
         .catch(error => {
@@ -147,26 +158,35 @@
     // --------------------------------------------------------
     // plank utils (physics)
 
-    const createBox = (x, y, width, height, dynamic = true)=>{
+    const createBox = (x, y, width, height, dynamic = true) => {
+        const calcPos = PositionToPercentage(x, y);
+
+        console.log(calcPos.y);
+
         const body = world.createBody({
-            position: Vec2(x,y),
+            position: Vec2(calcPos.x * SCALE - width, SCALE - (calcPos.y * SCALE - height)),
             type: dynamic ? 'dynamic' : 'static'
         });
 
-        body.createFixture(pl.Box(width/2, height/2), {
+        body.createFixture(pl.Box(width / 2, height / 2), {
             density: 1.0,
             friction: 0.5,
             restitution: 0.1
         });
 
+        //console.log(body.getPosition())
         return body;
     };
 
     const createPig = (x, y)=> {
 
+        const calcPos = PositionToPercentage(x, y);
+
         const body = world.createDynamicBody({
-            position: Vec2(x,y)
+            position: Vec2(calcPos.x * SCALE - PIG_RADIUS, SCALE - (calcPos.y * SCALE - PIG_RADIUS))
         });
+
+        console.log(body.getPosition());
 
         body.createFixture(pl.Circle(PIG_RADIUS), {
             density: 0.5,
@@ -236,9 +256,9 @@
 
         const loadedLevel = await LoadLevel(levelIndex);
 
-        const boxes = loadedLevel.block.map(b => createBox(b.x, b.y, b.width, b.height, true));
-        // const pigs = loadedLevel.pigs.map(p => createPig(p.x, p.y));
-        const pigs = loadedLevel.pigs.map(p => createPig(25, 0));
+        const boxes = loadedLevel.block.map(b => createBox(b.x, b.y, b.width / SCALE, b.height / SCALE, true));
+        const pigs = loadedLevel.pigs.map(p => createPig(p.x, p.y));
+        // const pigs = loadedLevel.pigs.map(p => createPig(25, 0));
 
         const bird = createBird();
 
